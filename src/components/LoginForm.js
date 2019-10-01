@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { userLogin } from "./../actions/creators";
 
-class Login extends Component {
+class LoginForm extends Component {
   constructor() {
     super();
 
@@ -63,4 +63,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(LoginForm);
