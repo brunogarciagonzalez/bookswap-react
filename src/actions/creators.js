@@ -8,7 +8,6 @@ export function updateUser(user) {
 export function userLogin(formData) {
   console.log("userLogin creator: ", formData);
   return function(dispatch, getState) {
-    debugger;
     fetch(RAILS_ROOT + "/sessions", {
       method: "POST",
       headers: {
@@ -19,7 +18,6 @@ export function userLogin(formData) {
     })
       .then(resp => resp.json())
       .then(userData => {
-        debugger;
         dispatch(updateUser(userData));
       });
   };

@@ -6,7 +6,6 @@ const initialState = {
 };
 
 function userReducer(state = initialState.user, action) {
-  debugger;
   switch (action.type) {
     case UPDATE_USER:
       return action.user;
