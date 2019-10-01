@@ -6,7 +6,6 @@ export function updateUser(user) {
 }
 
 export function userLogin(formData) {
-  console.log("userLogin creator: ", formData);
   return function(dispatch, getState) {
     fetch(RAILS_ROOT + "/sessions", {
       method: "POST",
@@ -17,8 +16,13 @@ export function userLogin(formData) {
       body: JSON.stringify(formData)
     })
       .then(resp => resp.json())
-      .then(userData => {
-        dispatch(updateUser(userData));
+      .then(data => {
+        if (data.success) {
+          localStorage.setItem("token", data.token);
+          dispatch(updateUser(data.user));
+        } else {
+          alert("Incorrect username or password.");
+        }
       });
   };
 }
