@@ -16,4 +16,4 @@ As the project name hints at, the idea is to build a platform for people to trad
 
 None yet, hoping to get it hosted soon.
 
-_Repo for Rails API (back end) for BookSwap.io can be found [here](https://github.com/brunogarciagonzalez/bookswap-rails)_
+__Repo for Rails API (back end) for BookSwap.io can be found [here](https://github.com/brunogarciagonzalez/bookswap-rails)__
