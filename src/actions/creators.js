@@ -23,7 +23,10 @@ export function userLogin(formData) {
         } else {
           alert("Incorrect username or password.");
         }
-      });
+      })
+      .catch(error =>
+        alert("The server had some trouble, please try again later.")
+      );
   };
 }
 
