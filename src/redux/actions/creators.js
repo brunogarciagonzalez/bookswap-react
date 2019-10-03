@@ -21,6 +21,8 @@ export function userLogin(formData) {
         if (data.success) {
           localStorage.setItem("token", data.token);
           dispatch(updateUser(data.user));
+        } else if (data.status >= 500) {
+          alert("The server had some trouble, please try again later.")
         } else {
           alert("Incorrect username or password.");
         }
