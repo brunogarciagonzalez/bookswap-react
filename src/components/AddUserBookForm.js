@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateAddUserBookFormISBN, checkAddUserFormISBN } from "./../redux/actions/creators";
+import { updateAddUserBookFormISBN, queryAddUserFormISBN } from "./../redux/actions/creators";
 
 class AddUserBookForm extends Component {
    
@@ -10,9 +10,8 @@ class AddUserBookForm extends Component {
 
     handleIsbnSubmission = e => {
         e.preventDefault();
-        this.props.checkISBN();
+        this.props.queryISBN();
     };
-
 
     render() {
         return (
@@ -31,15 +30,15 @@ class AddUserBookForm extends Component {
 
 function mapStateToProps(state){
     return {
-        isbn: state.AddUserBookForm.isbn
+        isbn: state.addUserBookForm.isbn
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         updateISBN: value => dispatch(updateAddUserBookFormISBN(value)),
-        checkISBN: () => dispatch(checkAddUserFormISBN())
+        queryISBN: () => dispatch(queryAddUserFormISBN())
     };
 }
 
-export default connect(null, mapDispatchToProps)(AddUserBookForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AddUserBookForm);

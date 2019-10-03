@@ -1,5 +1,5 @@
 import { RAILS_ROOT } from "./../../uris";
-import { UPDATE_USER, UPDATE_ADD_USERBOOK_FORM_ISBN, CHECK_ADD_USERBOOK_FORM_ISBN } from "./types";
+import { UPDATE_USER, UPDATE_ADD_USERBOOK_FORM_ISBN, UPDATE_ADD_USERBOOK_FORM_BOOKDATA } from "./types";
 import { parseBookObj } from "./helpers/parseBookObj.js";
 
 export function updateUser(user) {
@@ -38,28 +38,29 @@ export function updateAddUserBookFormISBN(value){
   return { type: UPDATE_ADD_USERBOOK_FORM_ISBN, value }
 }
 
-export function checkAddUserFormISBN(){
-  // return {
-  //   type: CHECK_ADD_USERBOOK_FORM_ISBN
-  // }
-
+export function queryAddUserFormISBN(){
   return function (dispatch, getState) {
     let isbn = getState().addUserBookForm.isbn
-    // let coverUrl = `http://covers.openlibrary.org/b/ISBN/${isbn}-L.jpg`;
+    // if ever needed, can get cover: `http://covers.openlibrary.org/b/ISBN/${isbn}-L.jpg`;
     let bookURL = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`;
     
     fetch(bookURL)
       .then(r => r.json())
       .then(data => { 
         let book = data[`ISBN:${isbn}`];
-        let parsed = parseBookObj(book, isbn);
-        debugger;
+        let parsedBook = parseBookObj(book, isbn);
+        dispatch(updateAddUserBookFormBookData(parsedBook))
        })
       .catch(error => alert(error))
   }
 
 
 }
+
+export function updateAddUserBookFormBookData(bookData){
+  return { type: UPDATE_ADD_USERBOOK_FORM_BOOKDATA, bookData }
+}
+
 // export function fetchPokemon() {
 //   const thunk = function(dispatch, getState) {
 //     fetch(pokeUrl)
