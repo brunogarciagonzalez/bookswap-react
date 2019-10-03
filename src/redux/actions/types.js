@@ -1,1 +1,6 @@
+// user -related
 export const UPDATE_USER = "UPDATE_USER";
+
+// addUserBookForm -related
+export const UPDATE_ADD_USERBOOK_FORM_ISBN = "UPDATE_ADD_USERBOOK_FORM_ISBN";
+export const CHECK_ADD_USERBOOK_FORM_ISBN = "CHECK_ADD_USERBOOK_FORM_ISBN";

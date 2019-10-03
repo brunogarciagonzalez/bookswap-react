@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import "./App.css";
 import LoginForm from "./components/LoginForm";
+import AddUserBookForm from "./components/AddUserBookForm";
 
 class App extends Component {
   render() {
@@ -8,6 +9,7 @@ class App extends Component {
       <div>
         <header>BookSwap React</header>
         <LoginForm />
+        <AddUserBookForm />
       </div>
     );
   }
