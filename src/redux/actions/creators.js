@@ -1,5 +1,5 @@
 import { UPDATE_USER } from "./types";
-import { RAILS_ROOT } from "./../uris";
+import { RAILS_ROOT } from "./../../uris";
 
 export function updateUser(user) {
   return { type: UPDATE_USER, user };
@@ -17,6 +17,7 @@ export function userLogin(formData) {
     })
       .then(resp => resp.json())
       .then(data => {
+        debugger
         if (data.success) {
           localStorage.setItem("token", data.token);
           dispatch(updateUser(data.user));
