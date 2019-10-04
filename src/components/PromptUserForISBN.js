@@ -5,7 +5,7 @@ import {
   queryAddUserFormISBN
 } from "./../redux/actions/creators";
 
-class AddUserBookForm extends Component {
+class PromptUserForISBN extends Component {
   handleIsbnChange = e => {
     this.props.updateISBN(e.target.value);
   };
@@ -48,4 +48,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUserBookForm);
+export default connect(mapStateToProps, mapDispatchToProps)(PromptUserForISBN);
