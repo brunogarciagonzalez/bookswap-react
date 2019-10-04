@@ -1,3 +1,7 @@
+// login -related
+export const UPDATE_LOGIN_FORM = "UPDATE_LOGIN_FORM";
+export const CLEAR_LOGIN_FORM = "CLEAR_LOGIN_FORM";
+
 // user -related
 export const UPDATE_USER = "UPDATE_USER";
 

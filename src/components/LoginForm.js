@@ -1,23 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { userLogin } from "./../redux/actions/creators";
+import { updateLoginForm, userLogin } from "./../redux/actions/creators";
 
 class LoginForm extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      username: "",
-      password: ""
-    };
-  }
-
   handleInputChange = e => {
     let key = e.target.name;
     let value = e.target.value;
-    let updateStateWith = {};
-    updateStateWith[key] = value;
-    this.setState(updateStateWith);
+    this.props.updateLoginForm(key, value);
+    // let updateStateWith = {};
+    // updateStateWith[key] = value;
+    // this.setState(updateStateWith);
   };
 
   handleFormSubmission = e => {
@@ -27,7 +19,7 @@ class LoginForm extends Component {
   };
 
   render() {
-    let { username, password } = this.state;
+    let { username, password } = this.props;
 
     return (
       <div>
@@ -57,10 +49,18 @@ class LoginForm extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    username: state.loginForm.username,
+    password: state.loginForm.password
+  };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
+    updateLoginForm: (key, value) => dispatch(updateLoginForm(key, value)),
     handleLogin: formData => dispatch(userLogin(formData))
   };
 }
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
