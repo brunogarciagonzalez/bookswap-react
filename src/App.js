@@ -4,7 +4,7 @@ import { isEmpty } from "lodash";
 
 // import "./App.css";
 import LoginForm from "./components/LoginForm";
-import AddUserBookForm from "./components/AddUserBookForm";
+import PromptUserForISBN from "./components/PromptUserForISBN";
 import PromptUserToConfirmBook from "./components/PromptUserToConfirmBook";
 import PromptUserToIncludeImagesAndDescription from "./components/PromptUserToIncludeImagesAndDescription";
 
@@ -14,7 +14,7 @@ class App extends Component {
       <div>
         <header>BookSwap React</header>
         <LoginForm />
-        <AddUserBookForm />
+        <PromptUserForISBN />
         {!isEmpty(this.props.book) && !this.props.isbnConfirmed ? (
           <PromptUserToConfirmBook />
         ) : null}
