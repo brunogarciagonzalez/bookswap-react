@@ -6,6 +6,7 @@ import { isEmpty } from "lodash";
 import LoginForm from "./components/LoginForm";
 import AddUserBookForm from "./components/AddUserBookForm";
 import PromptUserToConfirmBook from "./components/PromptUserToConfirmBook";
+import PromptUserToIncludeImagesAndDescription from "./components/PromptUserToIncludeImagesAndDescription";
 
 class App extends Component {
   render() {
@@ -14,7 +15,12 @@ class App extends Component {
         <header>BookSwap React</header>
         <LoginForm />
         <AddUserBookForm />
-        {!isEmpty(this.props.book) ? <PromptUserToConfirmBook /> : null}
+        {!isEmpty(this.props.book) && !this.props.isbnConfirmed ? (
+          <PromptUserToConfirmBook />
+        ) : null}
+        {this.props.isbnConfirmed ? (
+          <PromptUserToIncludeImagesAndDescription />
+        ) : null}
       </div>
     );
   }
@@ -22,7 +28,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    book: state.addUserBookForm.bookData
+    book: state.addUserBookForm.bookData,
+    isbnConfirmed: state.addUserBookForm.isbnConfirmed
   };
 };
 
