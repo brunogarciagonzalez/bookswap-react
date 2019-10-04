@@ -11,6 +11,7 @@ As the project name hints at, the idea is to build a platform for people to trad
 * `react-redux`: "^7.1.1",
 * `redux`: "^4.0.4",
 * `redux-thunk`: "^2.3.0"
+* `lodash`: "^4.17.15"
 
 ### Deployment instructions
 

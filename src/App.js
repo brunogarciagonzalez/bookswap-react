@@ -1,6 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { isEmpty } from "lodash";
+
 // import "./App.css";
 import LoginForm from "./components/LoginForm";
+import AddUserBookForm from "./components/AddUserBookForm";
+import PromptUserToConfirmBook from "./components/PromptUserToConfirmBook";
+import PromptUserToIncludeImagesAndDescription from "./components/PromptUserToIncludeImagesAndDescription";
 
 class App extends Component {
   render() {
@@ -8,9 +14,23 @@ class App extends Component {
       <div>
         <header>BookSwap React</header>
         <LoginForm />
+        <AddUserBookForm />
+        {!isEmpty(this.props.book) && !this.props.isbnConfirmed ? (
+          <PromptUserToConfirmBook />
+        ) : null}
+        {this.props.isbnConfirmed ? (
+          <PromptUserToIncludeImagesAndDescription />
+        ) : null}
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    book: state.addUserBookForm.bookData,
+    isbnConfirmed: state.addUserBookForm.isbnConfirmed
+  };
+};
+
+export default connect(mapStateToProps)(App);
