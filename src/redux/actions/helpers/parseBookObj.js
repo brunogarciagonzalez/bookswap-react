@@ -1,4 +1,4 @@
-export function parseBookObj(obj, isbn){
+export default function parseBookObj(obj, isbn){
     // the isbn is a separate arg because it is the ISBN inputted by user.
     // the API may return both ISBN-10 & ISBN-13, but if it does not then
     // the user-inputted ISBN can be used to fill in that gap.

@@ -1,6 +1,6 @@
 import { RAILS_ROOT } from "./../../uris";
 import { UPDATE_USER, UPDATE_ADD_USERBOOK_FORM_ISBN, UPDATE_ADD_USERBOOK_FORM_BOOKDATA } from "./types";
-import { parseBookObj } from "./helpers/parseBookObj.js";
+import parseBookObj from "./helpers/parseBookObj.js";
 
 export function updateUser(user) {
   return { type: UPDATE_USER, user };
