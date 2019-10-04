@@ -1,5 +1,7 @@
 import { RAILS_ROOT } from "./../../uris";
 import {
+  UPDATE_LOGIN_FORM,
+  CLEAR_LOGIN_FORM,
   UPDATE_USER,
   UPDATE_ADD_USERBOOK_FORM_ISBN,
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
@@ -10,12 +12,16 @@ import {
 import parseBookObj from "./helpers/parseBookObj.js";
 import { makeDeepCopy } from "./../helpers.js";
 
-export function updateUser(user) {
-  return { type: UPDATE_USER, user };
+export function updateLoginForm(key, value) {
+  return { type: UPDATE_LOGIN_FORM, key, value };
+}
+export function clearLoginForm() {
+  return { type: CLEAR_LOGIN_FORM };
 }
 
-export function userLogin(formData) {
+export function userLogin() {
   return function(dispatch, getState) {
+    let formData = getState().loginForm;
     fetch(RAILS_ROOT + "/sessions", {
       method: "POST",
       headers: {
@@ -26,10 +32,10 @@ export function userLogin(formData) {
     })
       .then(resp => resp.json())
       .then(data => {
-        debugger;
         if (data.success) {
           localStorage.setItem("token", data.token);
           dispatch(updateUser(data.user));
+          dispatch(clearLoginForm());
         } else if (data.status >= 500) {
           alert("The server had some trouble, please try again later.");
         } else {
@@ -40,6 +46,10 @@ export function userLogin(formData) {
         alert("The server had some trouble, please try again later.")
       );
   };
+}
+
+export function updateUser(user) {
+  return { type: UPDATE_USER, user };
 }
 
 export function updateAddUserBookFormISBN(value) {

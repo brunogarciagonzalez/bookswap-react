@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 import {
+  UPDATE_LOGIN_FORM,
+  CLEAR_LOGIN_FORM,
   UPDATE_USER,
   UPDATE_ADD_USERBOOK_FORM_ISBN,
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
@@ -10,6 +12,10 @@ import {
 import { makeDeepCopy } from "./helpers";
 
 const initialState = {
+  loginForm: {
+    username: "",
+    password: ""
+  },
   user: {},
   addUserBookForm: {
     isbn: "",
@@ -20,6 +26,23 @@ const initialState = {
     images: []
   }
 };
+
+function loginFormReducer(state = initialState.loginForm, action) {
+  switch (action.type) {
+    case UPDATE_LOGIN_FORM: {
+      let deepCopy = makeDeepCopy(state);
+      deepCopy[action.key] = action.value;
+      return deepCopy;
+    }
+    case CLEAR_LOGIN_FORM: {
+      let deepCopy = makeDeepCopy(initialState.loginForm);
+      return deepCopy;
+    }
+    default: {
+      return state;
+    }
+  }
+}
 
 function userReducer(state = initialState.user, action) {
   switch (action.type) {
@@ -75,6 +98,7 @@ function addUserBookFormReducer(state = initialState.addUserBookForm, action) {
 }
 
 const rootReducer = combineReducers({
+  loginForm: loginFormReducer,
   user: userReducer,
   addUserBookForm: addUserBookFormReducer
 });
