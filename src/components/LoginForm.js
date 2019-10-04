@@ -4,18 +4,12 @@ import { updateLoginForm, userLogin } from "./../redux/actions/creators";
 
 class LoginForm extends Component {
   handleInputChange = e => {
-    let key = e.target.name;
-    let value = e.target.value;
-    this.props.updateLoginForm(key, value);
-    // let updateStateWith = {};
-    // updateStateWith[key] = value;
-    // this.setState(updateStateWith);
+    this.props.updateLoginForm(e.target.name, e.target.value);
   };
 
   handleFormSubmission = e => {
     e.preventDefault();
-    this.setState({ username: "", password: "" });
-    this.props.handleLogin(this.state);
+    this.props.handleLogin();
   };
 
   render() {
@@ -59,7 +53,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateLoginForm: (key, value) => dispatch(updateLoginForm(key, value)),
-    handleLogin: formData => dispatch(userLogin(formData))
+    handleLogin: () => dispatch(userLogin())
   };
 }
 
