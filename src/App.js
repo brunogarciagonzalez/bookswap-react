@@ -14,16 +14,16 @@ class App extends Component {
         <header>BookSwap React</header>
         <LoginForm />
         <AddUserBookForm />
-        { !isEmpty(this.props.book) ? <PromptUserToConfirmBook /> : null }
+        {!isEmpty(this.props.book) ? <PromptUserToConfirmBook /> : null}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     book: state.addUserBookForm.bookData
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(App);
