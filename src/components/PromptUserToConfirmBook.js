@@ -1,33 +1,60 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { updateConfirmationOfISBN } from "./../redux/actions/creators";
 
 class PromptUserToConfirmBook extends Component {
+  handleNo = e => {
     // button::no should clear state.addUserBookForm.bookData
-    // button::yes should update state.addUserBookForm.isbnConfirmed 
-        // and move forward to images
-        
-    render(){
-        let { title, bookUrl, coverUrl, authorsString, identifiers, authors } = this.props.book;
+    this.props.updateConfirmationOfISBN(false);
+  };
 
-        return (
-            <div>
-                <img src={coverUrl} alt={`Book Cover for "${title}" by ${authorsString}`}/>
-                <p>
-                    Title: {title} <br />
-                    By: {authorsString} <br />
-                    ISBN-13: {identifiers["ISBN-13"]} <br />
-                    ISBN-10: {identifiers["ISBN-10"]} <br />
-                    Is this your book? <button>Yes</button> <button>No</button>
-                </p>
-            </div>
-        )
-    }
+  handleYes = e => {
+    // button::yes should update state.addUserBookForm.isbnConfirmed
+    // and move forward to images
+    this.props.updateConfirmationOfISBN(true);
+  };
+
+  render() {
+    let {
+      title,
+      // bookUrl,
+      coverUrl,
+      authorsString,
+      identifiers
+      // authors
+    } = this.props.book;
+
+    return (
+      <div>
+        <img
+          src={coverUrl}
+          alt={`Book Cover for "${title}" by ${authorsString}`}
+        />
+        <p>
+          Title: {title} <br />
+          By: {authorsString} <br />
+          ISBN-13: {identifiers["ISBN-13"]} <br />
+          ISBN-10: {identifiers["ISBN-10"]} <br />
+          Is this your book? <button onClick={this.handleNo}>No</button>{" "}
+          <button onClick={this.handleYes}>Yes</button>
+        </p>
+      </div>
+    );
+  }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        book: state.addUserBookForm.bookData
-    }
-}
+const mapStateToProps = state => {
+  return {
+    book: state.addUserBookForm.bookData
+  };
+};
 
-export default connect(mapStateToProps)(PromptUserToConfirmBook);
+const mapDispatchToProps = dispatch => {
+  return {
+    updateConfirmationOfISBN: value => dispatch(updateConfirmationOfISBN(value))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+  PromptUserToConfirmBook
+);
