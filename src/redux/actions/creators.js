@@ -8,7 +8,9 @@ import {
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
   UPDATE_ADD_USERBOOK_FORM_ISBN_CONFIRMATION,
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
-  UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
+  UPDATE_ADD_USERBOOK_FORM_DESCRIPTION,
+  UPDATE_ACTIVE_USERBOOK,
+  CLEAR_ACTIVE_USERBOOK
 } from "./types";
 import { makeDeepCopy, validISBN, parseBookObj } from "./../helpers.js";
 
@@ -118,7 +120,20 @@ export function submitAddUserBookForm() {
     })
       .then(res => res.json())
       .then(data => {
-        debugger;
+        if (data.success) {
+          dispatch(updateActiveUserBook(data.user_book));
+          // clear addUserBookForm
+        } else {
+          alert("error @ submitAddUserBookForm()");
+        }
       });
   };
+}
+
+export function updateActiveUserBook(userBook) {
+  return { type: UPDATE_ACTIVE_USERBOOK, userBook };
+}
+
+export function clearActiveUserBook(userBook) {
+  return { type: CLEAR_ACTIVE_USERBOOK };
 }
