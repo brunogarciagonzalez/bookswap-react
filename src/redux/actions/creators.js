@@ -9,6 +9,7 @@ import {
   UPDATE_ADD_USERBOOK_FORM_ISBN_CONFIRMATION,
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION,
+  CLEAR_ADD_USERBOOK_FORM,
   UPDATE_ACTIVE_USERBOOK,
   CLEAR_ACTIVE_USERBOOK
 } from "./types";
@@ -102,6 +103,9 @@ export function updateAddUserBookFormCondition(value) {
 export function updateAddUserBookFormDescription(value) {
   return { type: UPDATE_ADD_USERBOOK_FORM_DESCRIPTION, value };
 }
+export function clearAddUserBookForm() {
+  return { type: CLEAR_ADD_USERBOOK_FORM };
+}
 
 export function submitAddUserBookForm() {
   return function(dispatch, getState) {
@@ -122,7 +126,7 @@ export function submitAddUserBookForm() {
       .then(data => {
         if (data.success) {
           dispatch(updateActiveUserBook(data.user_book));
-          // clear addUserBookForm
+          dispatch(clearAddUserBookForm());
         } else {
           alert("error @ submitAddUserBookForm()");
         }
