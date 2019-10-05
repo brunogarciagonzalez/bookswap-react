@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import initialState from "./initialState";
 import {
   UPDATE_LOGIN_FORM,
   CLEAR_LOGIN_FORM,
@@ -10,22 +11,6 @@ import {
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
 } from "./actions/types";
 import { makeDeepCopy, includesOtherThanNumbers } from "./helpers";
-
-const initialState = {
-  loginForm: {
-    username: "",
-    password: ""
-  },
-  user: {},
-  addUserBookForm: {
-    isbn: "",
-    bookData: {},
-    isbnConfirmed: false,
-    condition: "Used - Very Good",
-    description: "",
-    images: []
-  }
-};
 
 function loginFormReducer(state = initialState.loginForm, action) {
   switch (action.type) {
