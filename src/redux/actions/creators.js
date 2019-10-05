@@ -1,5 +1,5 @@
 import { isEmpty } from "lodash";
-import { RAILS_ROOT } from "./../../uris";
+import { RAILS_ROOT } from "./../../URIs.js";
 import {
   UPDATE_LOGIN_FORM,
   CLEAR_LOGIN_FORM,
