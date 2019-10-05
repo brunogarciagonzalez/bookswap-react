@@ -1,8 +1,6 @@
 import { combineReducers } from "redux";
 import initialState from "./initialState";
 import {
-  UPDATE_LOGIN_FORM,
-  CLEAR_LOGIN_FORM,
   UPDATE_USER,
   UPDATE_ADD_USERBOOK_FORM_ISBN,
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
@@ -10,24 +8,8 @@ import {
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
 } from "./actions/types";
-import { makeDeepCopy, includesOtherThanNumbers } from "./helpers";
-
-function loginFormReducer(state = initialState.loginForm, action) {
-  switch (action.type) {
-    case UPDATE_LOGIN_FORM: {
-      let deepCopy = makeDeepCopy(state);
-      deepCopy[action.key] = action.value;
-      return deepCopy;
-    }
-    case CLEAR_LOGIN_FORM: {
-      let deepCopy = makeDeepCopy(initialState.loginForm);
-      return deepCopy;
-    }
-    default: {
-      return state;
-    }
-  }
-}
+import { makeDeepCopy, includesOtherThanNumbers } from "./helpers.js";
+import loginFormReducer from "./reducers/loginFormReducer.js";
 
 function userReducer(state = initialState.user, action) {
   switch (action.type) {
