@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import initialState from "./initialState";
 import {
-  UPDATE_USER,
   UPDATE_ADD_USERBOOK_FORM_ISBN,
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
   UPDATE_ADD_USERBOOK_FORM_ISBN_CONFIRMATION,
@@ -10,21 +9,7 @@ import {
 } from "./actions/types";
 import { makeDeepCopy, includesOtherThanNumbers } from "./helpers.js";
 import loginFormReducer from "./reducers/loginFormReducer.js";
-
-function userReducer(state = initialState.user, action) {
-  switch (action.type) {
-    case UPDATE_USER: {
-      return action.user;
-    }
-    // case y:
-    // {
-    //    code block
-    // }
-    default: {
-      return state;
-    }
-  }
-}
+import userReducer from "./reducers/userReducer.js";
 
 function addUserBookFormReducer(state = initialState.addUserBookForm, action) {
   switch (action.type) {
