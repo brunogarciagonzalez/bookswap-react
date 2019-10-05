@@ -9,7 +9,7 @@ import {
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
 } from "./actions/types";
-import { makeDeepCopy } from "./helpers";
+import { makeDeepCopy, includesOtherThanNumbers } from "./helpers";
 
 const initialState = {
   loginForm: {
@@ -62,7 +62,10 @@ function userReducer(state = initialState.user, action) {
 function addUserBookFormReducer(state = initialState.addUserBookForm, action) {
   switch (action.type) {
     case UPDATE_ADD_USERBOOK_FORM_ISBN: {
-      if (action.value.length <= 13 && !action.value.match(/\D+/)) {
+      if (
+        action.value.length <= 13 &&
+        !includesOtherThanNumbers(action.value)
+      ) {
         let deepCopy = makeDeepCopy(state);
         deepCopy.isbn = action.value;
         return deepCopy;
