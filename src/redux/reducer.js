@@ -62,9 +62,13 @@ function userReducer(state = initialState.user, action) {
 function addUserBookFormReducer(state = initialState.addUserBookForm, action) {
   switch (action.type) {
     case UPDATE_ADD_USERBOOK_FORM_ISBN: {
-      let deepCopy = makeDeepCopy(state);
-      deepCopy.isbn = action.value;
-      return deepCopy;
+      if (action.value.length <= 13 && !action.value.match(/\D+/)) {
+        let deepCopy = makeDeepCopy(state);
+        deepCopy.isbn = action.value;
+        return deepCopy;
+      } else {
+        return state;
+      }
     }
     case UPDATE_ADD_USERBOOK_FORM_BOOKDATA: {
       let deepCopy = makeDeepCopy(state);
