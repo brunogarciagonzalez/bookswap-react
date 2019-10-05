@@ -19,25 +19,33 @@ export function parseBookObj(obj, isbn) {
   // the isbn is a separate arg because it is the ISBN inputted by user.
   // the API may return both ISBN-10 & ISBN-13, but if it does not then
   // the user-inputted ISBN can be used to fill in that gap.
-  let title = obj.title;
+  let title = parseFullTitle(obj);
   let bookUrl = obj.url;
-  let coverUrl = obj.cover.large
+  let coverUrl = obj.cover
     ? obj.cover.large
-    : obj.cover.medium ? obj.cover.medium : obj.cover.small;
+      ? obj.cover.large
+      : obj.cover.medium ? obj.cover.medium : obj.cover.small
+    : null;
   let authorsString = parseAuthorsIntoString(obj.authors);
   let identifiers = parseIdentifiers(obj.identifiers, isbn);
   let authors = parseAuthors(obj.authors);
   return { title, bookUrl, coverUrl, authorsString, identifiers, authors };
 }
 
+function parseFullTitle(bookObj) {
+  if (bookObj.subtitle) {
+    return bookObj.title + ": " + bookObj.subtitle;
+  } else {
+    return bookObj.title;
+  }
+}
+
 function parseAuthorsIntoString(arrayOfAuthorObjs) {
-  // TODO: backend -- add Author table and join to books
   // Author info: https://openlibrary.org/authors/OL6403658A.json
   return arrayOfAuthorObjs.map(author => author.name).join(", ");
 }
 
 function parseAuthors(arrayOfAuthorObjs) {
-  // TODO: keep author name and author OLid (via parser)
   return arrayOfAuthorObjs.map(obj => {
     return { name: obj.name, openLibraryID: parseOLid(obj.url) };
   });
