@@ -11,7 +11,8 @@ const initialState = {
     condition: "Used - Very Good",
     description: "",
     images: []
-  }
+  },
+  activeUserBook: {}
 };
 
 export default initialState;
