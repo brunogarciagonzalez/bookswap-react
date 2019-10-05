@@ -10,8 +10,7 @@ function loginFormReducer(state = initialState.loginForm, action) {
       return deepCopy;
     }
     case CLEAR_LOGIN_FORM: {
-      let deepCopy = makeDeepCopy(initialState.loginForm);
-      return deepCopy;
+      return initialState.loginForm;
     }
     default: {
       return state;
