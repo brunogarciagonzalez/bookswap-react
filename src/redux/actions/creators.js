@@ -78,7 +78,7 @@ export function queryAddUserFormISBN() {
       })
       .catch(error =>
         alert(
-          "We may not be able to add this book. \nThe OpenLibrary API may be missing some key information that we need about this book: \n" +
+          "We may not be able to add this book. The OpenLibrary API may be missing some key information that we need about this book: \n" +
             error
         )
       );
