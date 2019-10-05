@@ -10,8 +10,7 @@ import {
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
 } from "./types";
-import parseBookObj from "./helpers/parseBookObj.js";
-import { makeDeepCopy, validISBN } from "./../helpers.js";
+import { makeDeepCopy, validISBN, parseBookObj } from "./../helpers.js";
 
 export function updateLoginForm(key, value) {
   return { type: UPDATE_LOGIN_FORM, key, value };
@@ -77,7 +76,12 @@ export function queryAddUserFormISBN() {
           alert("Invalid ISBN.");
         }
       })
-      .catch(error => alert(error));
+      .catch(error =>
+        alert(
+          "We may not be able to add this book. \nThe OpenLibrary API may be missing some key information that we need about this book: \n" +
+            error
+        )
+      );
   };
 }
 
