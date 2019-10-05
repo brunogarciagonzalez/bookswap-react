@@ -1,3 +1,4 @@
+import { isEmpty } from "lodash";
 import { RAILS_ROOT } from "./../../uris";
 import {
   UPDATE_LOGIN_FORM,
@@ -10,7 +11,7 @@ import {
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
 } from "./types";
 import parseBookObj from "./helpers/parseBookObj.js";
-import { makeDeepCopy } from "./../helpers.js";
+import { makeDeepCopy, validISBN } from "./../helpers.js";
 
 export function updateLoginForm(key, value) {
   return { type: UPDATE_LOGIN_FORM, key, value };
@@ -59,15 +60,22 @@ export function updateAddUserBookFormISBN(value) {
 export function queryAddUserFormISBN() {
   return function(dispatch, getState) {
     let isbn = getState().addUserBookForm.isbn;
+    if (!validISBN(isbn)) {
+      return alert("Invalid ISBN.");
+    }
     // if ever needed, can get cover: `http://covers.openlibrary.org/b/ISBN/${isbn}-L.jpg`;
     let bookURL = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&jscmd=data&format=json`;
 
     fetch(bookURL)
       .then(r => r.json())
       .then(data => {
-        let book = data[`ISBN:${isbn}`];
-        let parsedBook = parseBookObj(book, isbn);
-        dispatch(updateAddUserBookFormBookData(parsedBook));
+        if (!isEmpty(data)) {
+          let book = data[`ISBN:${isbn}`];
+          let parsedBook = parseBookObj(book, isbn);
+          dispatch(updateAddUserBookFormBookData(parsedBook));
+        } else {
+          alert("Invalid ISBN.");
+        }
       })
       .catch(error => alert(error));
   };
