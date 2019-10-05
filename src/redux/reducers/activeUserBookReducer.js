@@ -10,7 +10,7 @@ function activeUserBookReducer(state = initialState.activeUserBook, action) {
       return action.userBook;
     }
     case CLEAR_ACTIVE_USERBOOK: {
-      return {};
+      return initialState.activeUserBook;
     }
     default: {
       return state;
