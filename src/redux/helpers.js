@@ -40,7 +40,7 @@ function parseFullTitle(bookObj) {
   }
 }
 
-function parseAuthorsIntoString(arrayOfAuthorObjs) {
+export function parseAuthorsIntoString(arrayOfAuthorObjs) {
   // Author info: https://openlibrary.org/authors/OL6403658A.json
   return arrayOfAuthorObjs.map(author => author.name).join(", ");
 }

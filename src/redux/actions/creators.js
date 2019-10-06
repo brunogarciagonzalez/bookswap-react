@@ -130,7 +130,10 @@ export function submitAddUserBookForm() {
         } else {
           alert("error @ submitAddUserBookForm()");
         }
-      });
+      })
+      .catch(error =>
+        alert("The server had some trouble, please try again later.")
+      );
   };
 }
 
