@@ -11,7 +11,9 @@ import {
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION,
   CLEAR_ADD_USERBOOK_FORM,
   UPDATE_ACTIVE_USERBOOK,
-  CLEAR_ACTIVE_USERBOOK
+  CLEAR_ACTIVE_USERBOOK,
+  UPDATE_BOOKS,
+  CLEAR_BOOKS
 } from "./types";
 import { makeDeepCopy, validISBN, parseBookObj } from "./../helpers.js";
 
@@ -143,4 +145,26 @@ export function updateActiveUserBook(userBook) {
 
 export function clearActiveUserBook(userBook) {
   return { type: CLEAR_ACTIVE_USERBOOK };
+}
+
+export function fetchBooks() {
+  return function(dispatch, getState) {
+    // fetch books
+    fetch(RAILS_ROOT + "/books")
+      .then(res => res.json())
+      .then(booksArray => {
+        dispatch(updateBooks(booksArray));
+      })
+      .catch(error =>
+        alert("The server had some trouble, please try again later.")
+      );
+  };
+}
+
+export function updateBooks(books) {
+  return { type: UPDATE_BOOKS, books };
+}
+
+export function clearBooks() {
+  return { type: CLEAR_BOOKS };
 }

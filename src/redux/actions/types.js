@@ -20,3 +20,7 @@ export const CLEAR_ADD_USERBOOK_FORM = "CLEAR_ADD_USERBOOK_FORM";
 // activeUserBook -related
 export const UPDATE_ACTIVE_USERBOOK = "UPDATE_ACTIVE_USERBOOK";
 export const CLEAR_ACTIVE_USERBOOK = "CLEAR_ACTIVE_USERBOOK";
+
+// books -related
+export const UPDATE_BOOKS = "UPDATE_BOOKS";
+export const CLEAR_BOOKS = "CLEAR_BOOKS";
