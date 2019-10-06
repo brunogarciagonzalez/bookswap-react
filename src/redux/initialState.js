@@ -12,7 +12,8 @@ const initialState = {
     description: "",
     images: []
   },
-  activeUserBook: {}
+  activeUserBook: {},
+  books: []
 };
 
 export default initialState;
