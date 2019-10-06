@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import LoginForm from "./components/LoginForm";
 import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
 import ActiveUserBook from "./components/ActiveUserBook";
+import BooksContainer from "./components/BooksContainer";
 
 import { isEmpty } from "lodash";
 import { connect } from "react-redux";
@@ -17,6 +18,7 @@ class App extends Component {
         <LoginForm />
         <AddUserBookFormPhaser />
         {!isEmpty(this.props.activeUserBook) ? <ActiveUserBook /> : null}
+        <BooksContainer />
       </div>
     );
   }
