@@ -150,7 +150,7 @@ export function clearActiveUserBook(userBook) {
 export function fetchBooks() {
   return function(dispatch, getState) {
     // fetch books
-    fetch(RAILS_ROOT + "/books")
+    fetch(RAILS_ROOT + "/books/actives_only")
       .then(res => res.json())
       .then(booksArray => {
         dispatch(updateBooks(booksArray));
