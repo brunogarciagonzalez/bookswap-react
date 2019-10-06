@@ -5,8 +5,7 @@ import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
 import SelectedUserBook from "./components/SelectedUserBook";
 import BooksContainer from "./components/BooksContainer";
 
-import { isEmpty } from "lodash";
-import { connect } from "react-redux";
+import { Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -15,19 +14,25 @@ class App extends Component {
         <header>
           BookSwap React (logged in: {localStorage.token ? "true" : "false"})
         </header>
-        <LoginForm />
-        <AddUserBookFormPhaser />
-        {!isEmpty(this.props.selectedUserBook) ? <SelectedUserBook /> : null}
-        <BooksContainer />
+        <Switch>
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/post-new" component={AddUserBookFormPhaser} />
+          <Route exact path="/explore-available" component={BooksContainer} />
+          <Route
+            path="/user-book/:id"
+            render={routeProps => {
+              // onMount: if storeState's selectedUserBook's ID !== routeProps's :id
+              // dispatch FETCH_AND_SELECT_USERBOOK
+              // need to build get /user_books/:id user_books#show
+              return <SelectedUserBook />;
+              // 'double render' dilemma:
+              // current ideas: use isEmpty() or localState.loading
+            }}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    selectedUserBook: state.selectedUserBook
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

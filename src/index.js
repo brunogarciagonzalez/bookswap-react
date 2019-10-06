@@ -6,11 +6,14 @@ import App from "./App";
 
 import store from "./redux/store.js";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
 
