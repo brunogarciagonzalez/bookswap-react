@@ -10,8 +10,8 @@ import {
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
   UPDATE_ADD_USERBOOK_FORM_DESCRIPTION,
   CLEAR_ADD_USERBOOK_FORM,
-  UPDATE_ACTIVE_USERBOOK,
-  CLEAR_ACTIVE_USERBOOK,
+  UPDATE_SELECTED_USERBOOK,
+  CLEAR_SELECTED_USERBOOK,
   UPDATE_BOOKS,
   CLEAR_BOOKS
 } from "./types";
@@ -127,7 +127,7 @@ export function submitAddUserBookForm() {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          dispatch(updateActiveUserBook(data.user_book));
+          dispatch(updateSelectedUserBook(data.user_book));
           dispatch(clearAddUserBookForm());
         } else {
           alert("error @ submitAddUserBookForm()");
@@ -139,12 +139,12 @@ export function submitAddUserBookForm() {
   };
 }
 
-export function updateActiveUserBook(userBook) {
-  return { type: UPDATE_ACTIVE_USERBOOK, userBook };
+export function updateSelectedUserBook(userBook) {
+  return { type: UPDATE_SELECTED_USERBOOK, userBook };
 }
 
-export function clearActiveUserBook(userBook) {
-  return { type: CLEAR_ACTIVE_USERBOOK };
+export function clearSelectedUserBook(userBook) {
+  return { type: CLEAR_SELECTED_USERBOOK };
 }
 
 export function fetchBooks() {

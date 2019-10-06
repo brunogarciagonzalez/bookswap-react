@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import "./App.css";
 import LoginForm from "./components/LoginForm";
 import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
-import ActiveUserBook from "./components/ActiveUserBook";
+import SelectedUserBook from "./components/SelectedUserBook";
 import BooksContainer from "./components/BooksContainer";
 
 import { isEmpty } from "lodash";
@@ -17,7 +17,7 @@ class App extends Component {
         </header>
         <LoginForm />
         <AddUserBookFormPhaser />
-        {!isEmpty(this.props.activeUserBook) ? <ActiveUserBook /> : null}
+        {!isEmpty(this.props.selectedUserBook) ? <SelectedUserBook /> : null}
         <BooksContainer />
       </div>
     );
@@ -26,7 +26,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeUserBook: state.activeUserBook
+    selectedUserBook: state.selectedUserBook
   };
 }
 

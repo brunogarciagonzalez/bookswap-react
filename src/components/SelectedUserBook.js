@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { parseAuthorsIntoString } from "./../redux/helpers.js";
 
-class ActiveUserBook extends Component {
+class SelectedUserBook extends Component {
   render() {
     let {
       book: { title, book_url, cover_url, isbn_10, isbn_13, authors },
       condition,
       description,
       user
-    } = this.props.activeUserBook;
+    } = this.props.selectedUserBook;
     let authorsString = parseAuthorsIntoString(authors);
 
     return (
@@ -41,8 +41,8 @@ class ActiveUserBook extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeUserBook: state.activeUserBook
+    selectedUserBook: state.selectedUserBook
   };
 }
 
-export default connect(mapStateToProps)(ActiveUserBook);
+export default connect(mapStateToProps)(SelectedUserBook);
