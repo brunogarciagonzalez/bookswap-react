@@ -4,7 +4,8 @@ import {
   UPDATE_ADD_USERBOOK_FORM_BOOKDATA,
   UPDATE_ADD_USERBOOK_FORM_ISBN_CONFIRMATION,
   UPDATE_ADD_USERBOOK_FORM_CONDITION,
-  UPDATE_ADD_USERBOOK_FORM_DESCRIPTION
+  UPDATE_ADD_USERBOOK_FORM_DESCRIPTION,
+  CLEAR_ADD_USERBOOK_FORM
 } from "./../actions/types.js";
 import { makeDeepCopy, includesOtherThanNumbers } from "./../helpers";
 
@@ -46,6 +47,9 @@ function addUserBookFormReducer(state = initialState.addUserBookForm, action) {
       let deepCopy = makeDeepCopy(state);
       deepCopy.description = action.value;
       return deepCopy;
+    }
+    case CLEAR_ADD_USERBOOK_FORM: {
+      return initialState.addUserBookForm;
     }
     default: {
       return state;
