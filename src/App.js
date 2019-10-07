@@ -19,15 +19,8 @@ class App extends Component {
           <Route exact path="/post-new" component={AddUserBookFormPhaser} />
           <Route exact path="/explore-available" component={BooksContainer} />
           <Route
-            path="/user-book/:id"
-            render={routeProps => {
-              // onMount: if storeState's selectedUserBook's ID !== routeProps's :id
-              // dispatch FETCH_AND_SELECT_USERBOOK
-              // need to build get /user_books/:id user_books#show
-              return <SelectedUserBook />;
-              // 'double render' dilemma:
-              // current ideas: use isEmpty() or localState.loading
-            }}
+            path="/user-books/:id"
+            render={routeProps => <SelectedUserBook {...routeProps} />}
           />
         </Switch>
       </div>

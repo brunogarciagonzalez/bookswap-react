@@ -168,3 +168,21 @@ export function updateBooks(books) {
 export function clearBooks() {
   return { type: CLEAR_BOOKS };
 }
+
+export function fetchAndSelectUserBook(id) {
+  return function(dispatch, getState) {
+    fetch(RAILS_ROOT + `/user_books/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        debugger;
+        if (data.success) {
+          dispatch(updateSelectedUserBook(data.user_book));
+        } else {
+          alert("UserBook not found");
+        }
+      })
+      .catch(error =>
+        alert("The server had some trouble, please try again later.")
+      );
+  };
+}

@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 import { parseAuthorsIntoString } from "./../redux/helpers.js";
+import { fetchAndSelectUserBook } from "./../redux/actions/creators.js";
 
 class SelectedUserBook extends Component {
+  componentDidMount() {
+    // if storeState's selectedUserBook's ID !== routeProps's :id
+    // then need to get that data from the Rails API and update storeState
+    if (
+      this.props.selectedUserBook.id !== parseInt(this.props.match.params.id)
+    ) {
+      this.props.fetchAndSelectUserBook(this.props.match.params.id);
+    }
+  }
+
   render() {
+    // 'double render' dilemma:
+    // current ideas: use isEmpty() or localState.loading
+    // isEmpty
+    if (isEmpty(this.props.selectedUserBook)) {
+      return <div>404 Not Found</div>;
+    }
+
     let {
       book: { title, book_url, cover_url, isbn_10, isbn_13, authors },
       condition,
@@ -45,4 +64,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(SelectedUserBook);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAndSelectUserBook: id => dispatch(fetchAndSelectUserBook(id))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedUserBook);
