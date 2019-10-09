@@ -18,6 +18,21 @@ class App extends Component {
           <Link to="/post-new">Post Book</Link>
         </header>
         <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return (
+                <div>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                </div>
+              );
+            }}
+          />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/post-new" component={AddUserBookFormPhaser} />
           <Route exact path="/explore" component={BooksContainer} />
