@@ -5,7 +5,7 @@ import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
 import SelectedUserBook from "./components/SelectedUserBook";
 import BooksContainer from "./components/BooksContainer";
 
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -13,6 +13,9 @@ class App extends Component {
       <div>
         <header>
           BookSwap React (logged in: {localStorage.token ? "true" : "false"})
+          <Link to="/explore-available">Explore</Link>
+          {"      "}
+          <Link to="/post-new">Post Book</Link>
         </header>
         <Switch>
           <Route exact path="/login" component={LoginForm} />
