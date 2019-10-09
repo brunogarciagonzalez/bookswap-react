@@ -13,14 +13,14 @@ class App extends Component {
       <div>
         <header>
           BookSwap React (logged in: {localStorage.token ? "true" : "false"})
-          <Link to="/explore-available">Explore</Link>
+          <Link to="/explore">Explore</Link>
           {"      "}
           <Link to="/post-new">Post Book</Link>
         </header>
         <Switch>
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/post-new" component={AddUserBookFormPhaser} />
-          <Route exact path="/explore-available" component={BooksContainer} />
+          <Route exact path="/explore" component={BooksContainer} />
           <Route
             path="/user-books/:id"
             render={routeProps => {
