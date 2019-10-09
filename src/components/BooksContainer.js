@@ -4,15 +4,15 @@ import { fetchBooks } from "./../redux/actions/creators";
 
 class BooksContainer extends Component {
   componentDidMount() {
-    this.props.fetchBooks();
+    if (this.props.books.length < 1) this.props.fetchBooks();
   }
 
   render() {
     return (
       <div>
         {this.props.books.map((book, idx) => (
-          <div>
-            <img key={idx} src={book.cover_url} alt={`${book.title}`} />
+          <div key={idx}>
+            <img src={book.cover_url} alt={`${book.title}`} />
             <p>{book.user_books.length} copies</p>
           </div>
         ))}

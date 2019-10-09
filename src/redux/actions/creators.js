@@ -129,6 +129,7 @@ export function submitAddUserBookForm() {
         if (data.success) {
           dispatch(updateSelectedUserBook(data.user_book));
           dispatch(clearAddUserBookForm());
+          dispatch(fetchBooks());
         } else {
           alert("error @ submitAddUserBookForm()");
         }
