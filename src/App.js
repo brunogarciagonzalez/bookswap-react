@@ -23,7 +23,10 @@ class App extends Component {
           <Route exact path="/explore-available" component={BooksContainer} />
           <Route
             path="/user-books/:id"
-            render={routeProps => <SelectedUserBook {...routeProps} />}
+            render={routeProps => {
+              let routeId = parseInt(routeProps.match.params.id); // will be int or NaN
+              return <SelectedUserBook routeId={routeId} />;
+            }}
           />
         </Switch>
       </div>
