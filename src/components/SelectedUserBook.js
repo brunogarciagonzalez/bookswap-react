@@ -9,7 +9,8 @@ class SelectedUserBook extends Component {
     // if storeState's selectedUserBook's ID !== routeProps's :id
     // then need to get that data from the Rails API and update storeState
     if (
-      this.props.selectedUserBook.id !== parseInt(this.props.match.params.id)
+      Number.isInteger(this.props.routeId) &&
+      this.props.selectedUserBook.id !== this.props.routeId
     ) {
       this.props.fetchAndSelectUserBook(this.props.match.params.id);
     }
