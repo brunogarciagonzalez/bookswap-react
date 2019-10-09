@@ -175,7 +175,6 @@ export function fetchAndSelectUserBook(id) {
     fetch(RAILS_ROOT + `/user_books/${id}`)
       .then(res => res.json())
       .then(data => {
-        debugger;
         if (data.success) {
           dispatch(updateSelectedUserBook(data.user_book));
         } else {
