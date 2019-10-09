@@ -178,7 +178,7 @@ export function fetchAndSelectUserBook(id) {
         if (data.success) {
           dispatch(updateSelectedUserBook(data.user_book));
         } else {
-          alert("UserBook not found");
+          dispatch(updateSelectedUserBook({ 404: true }));
         }
       })
       .catch(error =>

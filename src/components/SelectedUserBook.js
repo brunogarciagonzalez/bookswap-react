@@ -12,15 +12,16 @@ class SelectedUserBook extends Component {
       Number.isInteger(this.props.routeId) &&
       this.props.selectedUserBook.id !== this.props.routeId
     ) {
-      this.props.fetchAndSelectUserBook(this.props.match.params.id);
+      this.props.fetchAndSelectUserBook(this.props.routeId);
     }
   }
 
   render() {
-    // 'double render' dilemma:
-    // current ideas: use isEmpty() or localState.loading
-    // isEmpty
     if (isEmpty(this.props.selectedUserBook)) {
+      return <div>Loading</div>;
+    }
+
+    if (this.props.selectedUserBook[404]) {
       return <div>404 Not Found</div>;
     }
 
