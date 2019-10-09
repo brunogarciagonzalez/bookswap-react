@@ -12,7 +12,7 @@ const initialState = {
     description: "",
     images: []
   },
-  activeUserBook: {},
+  selectedUserBook: {},
   books: []
 };
 

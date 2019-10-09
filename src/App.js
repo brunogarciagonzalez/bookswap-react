@@ -2,11 +2,10 @@ import React, { Component } from "react";
 // import "./App.css";
 import LoginForm from "./components/LoginForm";
 import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
-import ActiveUserBook from "./components/ActiveUserBook";
+import SelectedUserBook from "./components/SelectedUserBook";
 import BooksContainer from "./components/BooksContainer";
 
-import { isEmpty } from "lodash";
-import { connect } from "react-redux";
+import { Switch, Route, Link } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -14,20 +13,40 @@ class App extends Component {
       <div>
         <header>
           BookSwap React (logged in: {localStorage.token ? "true" : "false"})
+          <Link to="/explore">Explore</Link>
+          {"      "}
+          <Link to="/post-new">Post Book</Link>
         </header>
-        <LoginForm />
-        <AddUserBookFormPhaser />
-        {!isEmpty(this.props.activeUserBook) ? <ActiveUserBook /> : null}
-        <BooksContainer />
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return (
+                <div>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                  <h1>HomePage!</h1>
+                </div>
+              );
+            }}
+          />
+          <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/post-new" component={AddUserBookFormPhaser} />
+          <Route exact path="/explore" component={BooksContainer} />
+          <Route
+            path="/user-books/:id"
+            render={routeProps => {
+              let routeId = parseInt(routeProps.match.params.id); // will be int or NaN
+              return <SelectedUserBook routeId={routeId} />;
+            }}
+          />
+        </Switch>
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    activeUserBook: state.activeUserBook
-  };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;

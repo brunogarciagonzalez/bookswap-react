@@ -1,15 +1,36 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { isEmpty } from "lodash";
 import { parseAuthorsIntoString } from "./../redux/helpers.js";
+import { fetchAndSelectUserBook } from "./../redux/actions/creators.js";
 
-class ActiveUserBook extends Component {
+class SelectedUserBook extends Component {
+  componentDidMount() {
+    // if storeState's selectedUserBook's ID !== routeProps's :id
+    // then need to get that data from the Rails API and update storeState
+    if (
+      Number.isInteger(this.props.routeId) &&
+      this.props.selectedUserBook.id !== this.props.routeId
+    ) {
+      this.props.fetchAndSelectUserBook(this.props.routeId);
+    }
+  }
+
   render() {
+    if (isEmpty(this.props.selectedUserBook)) {
+      return <div>Loading</div>;
+    }
+
+    if (this.props.selectedUserBook[404]) {
+      return <div>404 Not Found</div>;
+    }
+
     let {
       book: { title, book_url, cover_url, isbn_10, isbn_13, authors },
       condition,
       description,
       user
-    } = this.props.activeUserBook;
+    } = this.props.selectedUserBook;
     let authorsString = parseAuthorsIntoString(authors);
 
     return (
@@ -41,8 +62,14 @@ class ActiveUserBook extends Component {
 
 function mapStateToProps(state) {
   return {
-    activeUserBook: state.activeUserBook
+    selectedUserBook: state.selectedUserBook
   };
 }
 
-export default connect(mapStateToProps)(ActiveUserBook);
+function mapDispatchToProps(dispatch) {
+  return {
+    fetchAndSelectUserBook: id => dispatch(fetchAndSelectUserBook(id))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectedUserBook);
