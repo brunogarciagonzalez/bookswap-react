@@ -1,6 +1,7 @@
 import { isEmpty } from "lodash";
 import { RAILS_ROOT } from "./../../URIs.js";
 import {
+  UPDATE_REDIRECT_TO,
   UPDATE_LOGIN_FORM,
   CLEAR_LOGIN_FORM,
   UPDATE_USER,
@@ -16,6 +17,10 @@ import {
   CLEAR_BOOKS
 } from "./types";
 import { makeDeepCopy, validISBN, parseBookObj } from "./../helpers.js";
+
+export function updateRedirectTo(redirectTo) {
+  return { type: UPDATE_REDIRECT_TO, redirectTo };
+}
 
 export function updateLoginForm(key, value) {
   return { type: UPDATE_LOGIN_FORM, key, value };
@@ -130,6 +135,7 @@ export function submitAddUserBookForm() {
           dispatch(updateSelectedUserBook(data.user_book));
           dispatch(clearAddUserBookForm());
           dispatch(fetchBooks());
+          dispatch(updateRedirectTo(`/user-books/${data.user_book.id}`));
         } else {
           alert("error @ submitAddUserBookForm()");
         }
