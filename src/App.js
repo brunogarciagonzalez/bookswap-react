@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 // import "./App.css";
+import RedirectHelper from "./components/RedirectHelper";
 import LoginForm from "./components/LoginForm";
 import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
 import SelectedUserBook from "./components/SelectedUserBook";
@@ -11,6 +12,7 @@ class App extends Component {
   render() {
     return (
       <div>
+        <RedirectHelper />
         <header>
           BookSwap React (logged in: {localStorage.token ? "true" : "false"})
           <Link to="/explore">Explore</Link>

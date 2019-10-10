@@ -1,3 +1,6 @@
+// nextPath -related
+export const UPDATE_REDIRECT_TO = "UPDATE_REDIRECT_TO";
+
 // login -related
 export const UPDATE_LOGIN_FORM = "UPDATE_LOGIN_FORM";
 export const CLEAR_LOGIN_FORM = "CLEAR_LOGIN_FORM";
