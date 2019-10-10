@@ -1,4 +1,5 @@
 const initialState = {
+  redirectTo: null,
   loginForm: {
     username: "",
     password: ""
