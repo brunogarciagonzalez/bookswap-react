@@ -134,7 +134,6 @@ export function submitAddUserBookForm() {
         if (data.success) {
           dispatch(updateSelectedUserBook(data.user_book));
           dispatch(clearAddUserBookForm());
-          dispatch(fetchBooks());
           dispatch(updateRedirectTo(`/user-books/${data.user_book.id}`));
         } else {
           alert("error @ submitAddUserBookForm()");

@@ -4,7 +4,7 @@ import { fetchBooks } from "./../redux/actions/creators";
 
 class BooksContainer extends Component {
   componentDidMount() {
-    if (this.props.books.length < 1) this.props.fetchBooks();
+    this.props.fetchBooks();
   }
 
   render() {
