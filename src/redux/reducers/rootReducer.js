@@ -4,6 +4,7 @@ import loginFormReducer from "./loginFormReducer.js";
 import userReducer from "./userReducer.js";
 import addUserBookFormReducer from "./addUserBookFormReducer.js";
 import selectedUserBookReducer from "./selectedUserBookReducer.js";
+import selectedBookReducer from "./selectedBookReducer.js";
 import booksReducer from "./booksReducer.js";
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   addUserBookForm: addUserBookFormReducer,
   selectedUserBook: selectedUserBookReducer,
+  selectedBook: selectedBookReducer,
   books: booksReducer
 });
 

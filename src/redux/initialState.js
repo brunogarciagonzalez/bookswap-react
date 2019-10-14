@@ -14,6 +14,7 @@ const initialState = {
     images: []
   },
   selectedUserBook: {},
+  selectedBook: {},
   books: []
 };
 

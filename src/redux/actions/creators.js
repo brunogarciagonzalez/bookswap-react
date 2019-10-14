@@ -13,6 +13,8 @@ import {
   CLEAR_ADD_USERBOOK_FORM,
   UPDATE_SELECTED_USERBOOK,
   CLEAR_SELECTED_USERBOOK,
+  UPDATE_SELECTED_BOOK,
+  CLEAR_SELECTED_BOOK,
   UPDATE_BOOKS,
   CLEAR_BOOKS
 } from "./types";
@@ -151,6 +153,32 @@ export function updateSelectedUserBook(userBook) {
 
 export function clearSelectedUserBook(userBook) {
   return { type: CLEAR_SELECTED_USERBOOK };
+}
+
+export function updateSelectedBook(book) {
+  return { type: UPDATE_SELECTED_BOOK, book };
+}
+
+export function clearSelectedBook(userBook) {
+  return { type: CLEAR_SELECTED_BOOK };
+}
+
+export function fetchAndSelectBook(isbn) {
+  return function(dispatch, getState) {
+    fetch(RAILS_ROOT + `/books/${isbn}`)
+      .then(res => res.json())
+      .then(data => {
+        debugger;
+        if (data.success) {
+          dispatch(updateSelectedBook(data.book));
+        } else {
+          dispatch(updateSelectedBook({ 404: true }));
+        }
+      })
+      .catch(error =>
+        alert("The server had some trouble, please try again later.")
+      );
+  };
 }
 
 export function fetchBooks() {

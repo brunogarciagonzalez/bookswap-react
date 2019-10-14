@@ -13,7 +13,7 @@ function selectedUserBookReducer(
       return action.userBook;
     }
     case CLEAR_SELECTED_USERBOOK: {
-      return initialState.activeUserBook;
+      return initialState.selectedUserBook;
     }
     default: {
       return state;
