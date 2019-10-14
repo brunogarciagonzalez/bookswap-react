@@ -4,6 +4,7 @@ import RedirectHelper from "./components/RedirectHelper";
 import LoginForm from "./components/LoginForm";
 import AddUserBookFormPhaser from "./components/AddUserBookFormPhaser";
 import SelectedUserBook from "./components/SelectedUserBook";
+import SelectedBook from "./components/SelectedBook";
 import BooksContainer from "./components/BooksContainer";
 
 import { Switch, Route, Link } from "react-router-dom";
@@ -38,6 +39,14 @@ class App extends Component {
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/post-new" component={AddUserBookFormPhaser} />
           <Route exact path="/explore" component={BooksContainer} />
+          <Route
+            exact
+            path="/books/:isbn"
+            render={routeProps => {
+              let routeIsbn = parseInt(routeProps.match.params.isbn); // will be int or NaN
+              return <SelectedBook routeIsbn={routeIsbn} />;
+            }}
+          />
           <Route
             exact
             path="/user-books/:id"
