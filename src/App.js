@@ -39,6 +39,7 @@ class App extends Component {
           <Route exact path="/post-new" component={AddUserBookFormPhaser} />
           <Route exact path="/explore" component={BooksContainer} />
           <Route
+            exact
             path="/user-books/:id"
             render={routeProps => {
               let routeId = parseInt(routeProps.match.params.id); // will be int or NaN

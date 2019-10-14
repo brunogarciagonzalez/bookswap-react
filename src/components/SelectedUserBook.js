@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { isEmpty } from "lodash";
 import { parseAuthorsIntoString } from "./../redux/helpers.js";
-import { fetchAndSelectUserBook } from "./../redux/actions/creators.js";
+import {
+  fetchAndSelectUserBook,
+  updateSelectedUserBook
+} from "./../redux/actions/creators.js";
 
 class SelectedUserBook extends Component {
   componentDidMount() {
@@ -13,10 +16,13 @@ class SelectedUserBook extends Component {
       this.props.selectedUserBook.id !== this.props.routeId
     ) {
       this.props.fetchAndSelectUserBook(this.props.routeId);
+    } else if (!Number.isInteger(this.props.routeId)) {
+      this.props.updateSelectedUserBook({ 404: true });
     }
   }
 
   render() {
+    // if never fetches then stays empty then says "Loading" instead of 404
     if (isEmpty(this.props.selectedUserBook)) {
       return <div>Loading</div>;
     }
@@ -68,7 +74,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    fetchAndSelectUserBook: id => dispatch(fetchAndSelectUserBook(id))
+    fetchAndSelectUserBook: id => dispatch(fetchAndSelectUserBook(id)),
+    updateSelectedUserBook: userBook =>
+      dispatch(updateSelectedUserBook(userBook))
   };
 }
 
